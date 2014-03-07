@@ -20,6 +20,7 @@
     this.enabled    =
     this.timeout    =
     this.hoverState =
+    this.$measure   = 
     this.$element   = null
     
     this.init('tooltip', element, options)
@@ -28,6 +29,7 @@
   Tooltip.DEFAULTS = {
     animation: true,
     mouseOffset: 0,
+    measure: false,
     followMouse: false,
     placement: 'top',
     selector: false,
@@ -44,6 +46,10 @@
     this.type     = type
     this.$element = $(element)
     this.options  = this.getOptions(options)
+
+    if (this.options.measure) {
+      this.$measure = $(this.options.measure)
+    }
 
     var triggers = this.options.trigger.split(' ')
 
@@ -195,7 +201,7 @@
 
     placement = placement == 'bottom' && pos.top   + pos.height  + actualHeight - docScroll > parentHeight  ? 'top'    :
                 placement == 'top'    && pos.top   - docScroll   - actualHeight < 0                         ? 'bottom' :
-                placement == 'right'  && pos.right + actualWidth > parentWidth                              ? 'left'   :
+                placement == 'right'  && pos.left  + actualWidth > parentWidth                              ? 'left'   :
                 placement == 'left'   && pos.left  - actualWidth < parentLeft                               ? 'right'  :
                 placement
 
@@ -221,6 +227,9 @@
       var autoToken = /\s?auto?\s?/i
       var autoPlace = autoToken.test(placement)
       if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
+
+    pos.left = e.pageX + this.options.mouseOffset;
+    pos.top = e.pageY + this.options.mouseOffset;
 
     var placement = this.getAutoPlace($tip, placement, pos, actualWidth, actualHeight)
     var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight, e)
@@ -346,7 +355,17 @@
   }
 
   Tooltip.prototype.getPosition = function () {
+    
     var el = this.$element[0]
+    if(this.$element.prop('tagName') == 'AREA') {
+
+      var position = this.$element.attr('coords').split(',');
+      var x = parseInt(position[0], 0) + parseInt(this.$measure.offset().left, 0);
+      var y = parseInt(position[1], 0) + parseInt(this.$measure.offset().top, 0);
+
+      return {bottom: 0, height: el.offsetWidth, left: x, right: 0, top: y, width: el.offsetWidth}
+    }
+
     return $.extend({}, (typeof el.getBoundingClientRect == 'function') ? el.getBoundingClientRect() : {
       width: el.offsetWidth,
       height: el.offsetHeight
