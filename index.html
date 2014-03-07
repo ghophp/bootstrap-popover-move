@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        <!-- Bootstrap core CSS -->
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+        
+        <style>
+            .popover-area {
+                display: block;
+                width: 150px;
+                height: 150px;
+                background: #9C7A43;
+                text-indent: -9999px;
+            }
+
+            .test-right {
+                margin-left: 966px;
+                margin-top: 60px;
+                background: #FF9E49;
+            }
+
+            .test-bottom {
+                background: #9C6817;
+            }
+
+            .test-top {
+                margin-left: 966px;
+                margin-top: 60px;
+                background: #FFFBBF;
+            }
+
+            .popover {
+                max-width: none;
+            }
+        </style>
+    </head>
+
+    <body style="padding: 60px 0 0 0;">
+
+        <div class="container">
+
+            <div class="starter-template">
+                <a href="#" class="popover-area" data-toggle="popover" data-placement="auto right">Pop Over Area</a>
+                <a href="#" class="popover-area test-right" data-toggle="popover" data-placement="auto right">Pop Over Area</a>
+                <a href="#" class="popover-area test-bottom" data-toggle="popover" data-placement="auto bottom">Pop Over Area</a>
+                <a href="#" class="popover-area test-top" data-toggle="popover" data-placement="auto top">Pop Over Area</a>
+            </div>
+
+        </div>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="./assets/js/tooltip.js"></script>
+        <script src="./assets/js/popover.js"></script>
+
+        <script type="text/javascript">
+
+            var contents = [
+                '<div style="width: 200px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tu vero, inquam, ducas licet, si sequetur; Eiuro, inquit adridens, iniquum, hac quidem de re; Illa videamus, quae a te de amicitia dicta sunt. Hoc non est positum in nostra actione. Aperiendum est igitur, quid sit voluptas; Duo Reges: constructio interrete.</div>',
+                '<div style="width: 300px;">Omnes enim iucundum motum, quo sensus hilaretur. Si quicquam extra virtutem habeatur in bonis. Egone non intellego, quid sit don Graece, Latine voluptas? Restinguet citius, si ardentem acceperit. Ita enim vivunt quidam, ut eorum vita refellatur oratio. Quae contraria sunt his, malane? Nam ante Aristippus, et ille melius.</div>',
+                '<div style="width: 400px;">Suo genere perveniant ad extremum; In eo enim positum est id, quod dicimus esse expetendum. Idem etiam dolorem saepe perpetiuntur, ne, si id non faciant, incidant in maiorem. Graece donan, Latine voluptatem vocant. Habent enim et bene longam et satis litigiosam disputationem.</div>',
+                '<div style="width: 600px;">Tum mihi Piso: Quid ergo? Huius ego nunc auctoritatem sequens idem faciam. Quo modo autem optimum, si bonum praeterea nullum est? Hoc est non dividere, sed frangere. Hoc non est positum in nostra actione.</div>'
+            ];
+
+            $(document).ready(function(){
+
+                $('.popover-area').popover({
+                    mouseOffset: 20,
+                    container: 'body',
+                    followMouse: true,
+                    html: true,
+                    trigger: 'hover',
+                    content: function(){
+                        return contents[getRandomInt(0, 3)];
+                    }
+                });
+
+            });
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            function mousePlacement(tip, element) {
+                tip.css();
+            }
+
+        </script>
+
+    </body>
+</html>
