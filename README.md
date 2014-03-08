@@ -3,6 +3,18 @@ bootstrap-popover-move
 
 Based on popover of bootstrap, but has mouseFollow, that allow the popover to follow the mouse movement.
 
+usage
+=====
+
+Just import the scripts above the bootstrap declaration:
+
+``` html
+<script src="bootstrap.tooltip.js"></script>
+<script src="bootstrap.popover.js"></script>
+```
+
+And then:
+
 ``` javascript
 
 $('.popover-area').popover({
