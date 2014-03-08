@@ -3,8 +3,7 @@ bootstrap-popover-move
 
 Based on popover of bootstrap, but has mouseFollow, that allow the popover to follow the mouse movement.
 
-usage
-=====
+##usage
 
 Just import the scripts above the bootstrap declaration:
 
